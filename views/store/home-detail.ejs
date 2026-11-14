@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= home.houseName %> | Airbnb</title>
+
+    <link rel="stylesheet" href="/output.css">
+</head>
+
+<body class="bg-white text-gray-900">
+
+    <!-- Navbar -->
+    <%- include('../partials/nav') %>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+        <!-- Back Navigation -->
+        <a href="/"
+           class="inline-flex items-center gap-2 text-gray-600
+                  hover:text-rose-600 transition mb-6">
+            <span class="text-xl">←</span>
+            Back to homes
+        </a>
+
+        <!-- Property Heading -->
+        <section class="mb-6">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+                <%= home.houseName %>
+            </h1>
+
+            <div class="flex flex-wrap items-center gap-3 mt-3
+                        text-sm text-gray-600">
+
+                <span class="flex items-center gap-1">
+                    ⭐ <%= home.rating %> / 5
+                </span>
+
+                <span>·</span>
+
+                <span class="underline font-medium">
+                    <%= home.location %>
+                </span>
+
+                <span>·</span>
+
+                <span>Beautiful place to stay</span>
+            </div>
+        </section>
+
+        <!-- Main Property Image -->
+        <section class="w-full h-72 sm:h-96 md:h-[480px]
+                        overflow-hidden rounded-2xl bg-gray-100">
+
+            <img
+                src="<%= home.photo %>"
+                alt="<%= home.houseName %>"
+                class="w-full h-full object-cover"
+            >
+        </section>
+
+        <!-- Main Content and Booking Card -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-10">
+
+            <!-- Left Content -->
+            <div class="lg:col-span-2">
+
+                <!-- Property Overview -->
+                <section class="pb-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        Entire home hosted with care
+                    </h2>
+
+                    <p class="text-gray-500 mt-2">
+                        A comfortable stay in <%= home.location %>
+                    </p>
+
+                    <div class="flex flex-wrap gap-6 mt-5 text-gray-700">
+                        <span>🏠 Entire property</span>
+                        <span>🛏️ Cozy sleeping space</span>
+                        <span>👥 Ideal for guests</span>
+                    </div>
+                </section>
+
+                <!-- Description -->
+                <section class="py-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        About this place
+                    </h2>
+
+                    <p class="text-gray-600 leading-7 mt-4">
+                        Welcome to <%= home.houseName %>, a welcoming
+                        property located in <%= home.location %>.
+                        This home offers a relaxing atmosphere and
+                        thoughtfully arranged spaces for a comfortable
+                        stay.
+                    </p>
+
+                    <p class="text-gray-600 leading-7 mt-4">
+                        Whether you are planning a short vacation,
+                        visiting friends and family, or exploring the
+                        local area, this property offers a convenient
+                        place to unwind after a busy day.
+                    </p>
+
+                    <p class="text-gray-600 leading-7 mt-4">
+                        Enjoy a pleasant environment, easy access to
+                        everyday essentials, and a cozy space where
+                        you can relax and make the most of your visit.
+                        We hope your stay is enjoyable and memorable.
+                    </p>
+                </section>
+
+                <!-- Amenities -->
+                <section class="py-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        What this place offers
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">📶</span>
+                            <span>High-speed Wi-Fi</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">❄️</span>
+                            <span>Air conditioning</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">🍳</span>
+                            <span>Kitchen access</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">🚗</span>
+                            <span>Parking space</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">📺</span>
+                            <span>Television</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">🛏️</span>
+                            <span>Comfortable bedding</span>
+                        </div>
+
+                    </div>
+
+                    <p class="text-sm text-gray-400 mt-5">
+                        Sample amenities for demonstration purposes.
+                    </p>
+                </section>
+
+                <!-- Sleeping Arrangements -->
+                <section class="py-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        Where you'll sleep
+                    </h2>
+
+                    <div class="mt-5 max-w-sm border border-gray-200
+                                rounded-2xl p-5">
+
+                        <div class="text-4xl">🛏️</div>
+
+                        <h3 class="font-semibold mt-4">
+                            Comfortable bedroom
+                        </h3>
+
+                        <p class="text-gray-600 text-sm mt-2 leading-6">
+                            Relax in a peaceful sleeping space with
+                            comfortable bedding and room to store
+                            your belongings.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Location -->
+                <section class="py-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        Where you'll be
+                    </h2>
+
+                    <p class="text-gray-600 mt-4 leading-7">
+                        This property is located in
+                        <%= home.location %>, offering a convenient
+                        starting point for exploring the surrounding
+                        neighborhood, local markets, and nearby
+                        restaurants.
+                    </p>
+
+                    <div class="mt-5 bg-gray-100 rounded-2xl p-6">
+                        <div class="text-3xl">📍</div>
+
+                        <h3 class="font-semibold mt-3">
+                            <%= home.location %>
+                        </h3>
+
+                        <p class="text-gray-500 text-sm mt-2">
+                            Contact the host for the exact address
+                            and directions.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- House Rules -->
+                <section class="py-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        Things to know
+                    </h2>
+
+                    <h3 class="font-semibold mt-6">
+                        House rules
+                    </h3>
+
+                    <ul class="mt-4 space-y-3 text-gray-600">
+                        <li>🕒 Check-in: After 2:00 PM</li>
+                        <li>🕚 Check-out: Before 11:00 AM</li>
+                        <li>🚭 Avoid smoking inside the property.</li>
+                        <li>🔇 Please respect the neighbors.</li>
+                        <li>🐾 Confirm the pet policy with the host.</li>
+                    </ul>
+
+                    <h3 class="font-semibold mt-6">
+                        Safety and property
+                    </h3>
+
+                    <p class="text-gray-600 mt-3 leading-7">
+                        Guests are requested to keep the property clean,
+                        take care of the facilities, and follow any
+                        additional instructions provided by the host.
+                    </p>
+
+                    <p class="text-sm text-gray-400 mt-3">
+                        Sample rules; confirm actual policies with
+                        the property host.
+                    </p>
+                </section>
+
+                <!-- Guest Reviews -->
+                <section class="py-8 border-b border-gray-200">
+                    <h2 class="text-2xl font-semibold">
+                        ⭐ Guest reviews
+                    </h2>
+
+                    <p class="text-gray-500 mt-2">
+                        A comfortable stay makes all the difference.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2
+                                gap-5 mt-6">
+
+                        <!-- Review 1 -->
+                        <article class="border border-gray-200
+                                        rounded-2xl p-5">
+
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-full
+                                            bg-rose-100 flex items-center
+                                            justify-center font-bold
+                                            text-rose-700">
+                                    A
+                                </div>
+
+                                <div>
+                                    <h3 class="font-semibold">
+                                        Aarav Sharma
+                                    </h3>
+                                    <p class="text-sm text-gray-500">
+                                        Sample guest
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="mt-4 text-sm">⭐⭐⭐⭐⭐</p>
+
+                            <p class="text-gray-600 leading-6 mt-3">
+                                A lovely place with a peaceful
+                                atmosphere. The home felt welcoming
+                                and provided a comfortable setting
+                                for our stay.
+                            </p>
+                        </article>
+
+                        <!-- Review 2 -->
+                        <article class="border border-gray-200
+                                        rounded-2xl p-5">
+
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-full
+                                            bg-blue-100 flex items-center
+                                            justify-center font-bold
+                                            text-blue-700">
+                                    P
+                                </div>
+
+                                <div>
+                                    <h3 class="font-semibold">
+                                        Priya Verma
+                                    </h3>
+                                    <p class="text-sm text-gray-500">
+                                        Sample guest
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="mt-4 text-sm">⭐⭐⭐⭐⭐</p>
+
+                            <p class="text-gray-600 leading-6 mt-3">
+                                We enjoyed the convenient location
+                                and cozy environment. It was a nice
+                                place to relax and spend time together.
+                            </p>
+                        </article>
+
+                    </div>
+
+                    <p class="text-xs text-gray-400 mt-4">
+                        These are fictional sample reviews, not actual
+                        guest feedback.
+                    </p>
+                </section>
+
+                <!-- Host Information -->
+                <section class="py-8">
+                    <h2 class="text-2xl font-semibold">
+                        Meet your host
+                    </h2>
+
+                    <div class="mt-5 flex flex-col sm:flex-row
+                                items-start gap-5">
+
+                        <div class="w-16 h-16 rounded-full bg-rose-100
+                                    flex items-center justify-center
+                                    text-3xl">
+                            👤
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold">
+                                Your friendly host
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Here to help make your stay comfortable
+                            </p>
+
+                            <p class="text-gray-600 leading-7 mt-4">
+                                We love creating welcoming spaces where
+                                travelers can relax and feel at home.
+                                Feel free to ask questions about the
+                                property, local attractions, or nearby
+                                places to eat.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Booking Card -->
+            <aside class="lg:col-span-1">
+
+                <div class="lg:sticky lg:top-24 border border-gray-200
+                            rounded-2xl p-6 shadow-lg bg-white">
+
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-2xl font-bold">
+                            ₹<%= home.price %>
+                        </span>
+
+                        <span class="text-gray-500">
+                            / night
+                        </span>
+                    </div>
+
+                    <div class="mt-4 flex items-center gap-2 text-sm">
+                        <span>⭐ <%= home.rating %> / 5</span>
+                        <span class="text-gray-400">·</span>
+                        <span class="text-gray-500">
+                            Property rating
+                        </span>
+                    </div>
+
+                    <!-- Booking Form UI -->
+                    <form action="#" method="get"
+                          class="mt-6">
+
+                        <div class="border border-gray-300
+                                    rounded-xl overflow-hidden">
+
+                            <div class="grid grid-cols-2">
+                                <div class="p-3 border-r
+                                            border-b border-gray-300">
+
+                                    <label for="checkin"
+                                           class="block text-xs
+                                                  font-bold uppercase">
+                                        Check-in
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="checkin"
+                                        name="checkin"
+                                        class="w-full mt-2 text-sm
+                                               outline-none bg-white"
+                                    >
+                                </div>
+
+                                <div class="p-3 border-b border-gray-300">
+                                    <label for="checkout"
+                                           class="block text-xs
+                                                  font-bold uppercase">
+                                        Check-out
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="checkout"
+                                        name="checkout"
+                                        class="w-full mt-2 text-sm
+                                               outline-none bg-white"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="p-3">
+                                <label for="guests"
+                                       class="block text-xs
+                                              font-bold uppercase">
+                                    Guests
+                                </label>
+
+                                <select
+                                    id="guests"
+                                    name="guests"
+                                    class="w-full mt-2 text-sm
+                                           outline-none bg-white">
+
+                                    <option value="1">1 guest</option>
+                                    <option value="2" selected>
+                                        2 guests
+                                    </option>
+                                    <option value="3">3 guests</option>
+                                    <option value="4">4 guests</option>
+                                    <option value="5">5 guests</option>
+                                    <option value="6">6 guests</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="w-full mt-5 bg-rose-600
+                                   hover:bg-rose-700 text-white
+                                   font-semibold py-3 rounded-xl
+                                   transition">
+
+                            Reserve
+                        </button>
+                    </form>
+
+                    <p class="text-center text-sm text-gray-500 mt-4">
+                        Booking is not implemented yet.
+                    </p>
+
+                    <hr class="my-6 border-gray-200">
+
+                    <div class="flex justify-between text-gray-600">
+                        <span>Price per night</span>
+                        <span>₹<%= home.price %></span>
+                    </div>
+
+                    <div class="flex justify-between mt-4
+                                font-semibold text-gray-900">
+                        <span>Listed price</span>
+                        <span>₹<%= home.price %></span>
+                    </div>
+
+                    <p class="text-xs text-gray-400 mt-4">
+                        Taxes, fees, availability, and booking terms
+                        have not been calculated.
+                    </p>
+                </div>
+
+            </aside>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-200 mt-12 py-8
+                       text-center text-sm text-gray-500">
+
+            <p>© 2026 StayFinder · Your home away from home</p>
+
+            <p class="mt-2">
+                Discover comfortable stays and memorable experiences.
+            </p>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

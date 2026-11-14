@@ -1,0 +1,47 @@
+{
+  "name": "nestrivo",
+  "version": "1.0.0",
+  "description": "A full-featured vacation rental and home booking web application built with Node.js, Express, MongoDB, Tailwind CSS, and EJS.",
+  "main": "app.js",
+  "scripts": {
+    "start": "concurrently \"npm:dev\" \"npm:watch:css\"",
+    "dev": "nodemon app.js",
+    "server": "node app.js",
+    "chal": "nodemon app.js",
+    "watch:css": "npx @tailwindcss/cli -i ./src/input.css -o ./public/output.css --watch",
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./public/output.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yanki-Kamboj/nestRivo.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "airbnb-clone",
+    "tailwindcss",
+    "ejs",
+    "vacation-rental",
+    "booking-system"
+  ],
+  "author": "Yanki Kamboj (https://github.com/Yanki-Kamboj)",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "ejs": "^7.0.1",
+    "express": "^5.3.0",
+    "mongodb": "^7.7.0",
+    "mongoose": "^9.11.4",
+    "multer": "^2.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "autoprefixer": "^10.6.1",
+    "concurrently": "^9.0.0",
+    "nodemon": "^3.0.0",
+    "postcss": "^8.5.30",
+    "tailwindcss": "^4.3.3"
+  }
+}

@@ -1,0 +1,67 @@
+
+   <main class="max-w-7xl mx-auto px-6 py-10">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">
+            Available Homes
+        </h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <% homes.forEach(h => { %>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md
+                            hover:shadow-xl transition duration-300">
+
+                    <!-- House Photo -->
+                    <img
+                        src="<%= h.photo %>"
+                        alt="<%= h.houseName %>"
+                        class="w-full h-56 object-cover"
+                    >
+
+                    <div class="p-5">
+
+                        <!-- House Name and Rating -->
+                        <div class="flex justify-between items-start gap-3 mb-3">
+                            <h2 class="text-xl font-bold text-gray-800">
+                                <%= h.houseName %>
+                            </h2>
+
+                            <span class="flex items-center gap-1 text-gray-700
+                                         whitespace-nowrap">
+                                <span class="text-yellow-500">★</span>
+                                <%= h.rating %>
+                            </span>
+                        </div>
+
+                        <!-- Location -->
+                        <p class="text-gray-500 mb-4 flex items-center gap-2">
+                            <span>📍</span>
+                            <%= h.location %>
+                        </p>
+
+                        <!-- Price -->
+                        <div class="border-t border-gray-200 pt-4 flex
+                                    items-center justify-between">
+                            <p class="text-gray-900">
+                                <span class="text-xl font-bold">
+                                    ₹<%= h.price %>
+                                </span>
+                                <span class="text-gray-500 text-sm">
+                                    / night
+                                </span>
+                            </p>
+
+                            <span class="bg-rose-100 text-rose-600 px-3 py-2
+                                         rounded-lg text-sm font-semibold">
+                                Available
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+            <% }) %>
+
+        </div>
+    </main>
+

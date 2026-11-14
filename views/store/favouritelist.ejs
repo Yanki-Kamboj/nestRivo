@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Favorites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+   <%- include('../partials/nav') %>
+  <div class="max-w-7xl mx-auto px-6 py-10">
+
+    <h1 class=" pt-16 text-3xl font-bold text-gray-800 mb-2">
+      ❤️ My Favorite Homes
+    </h1>
+
+    <p class="text-gray-500 mb-8">
+      Your saved homes, all in one place.
+    </p>
+
+    <% if (!favorites || favorites.length === 0) { %>
+
+      <div class="bg-white rounded-xl shadow-sm p-10 text-center">
+        <div class="text-5xl mb-4">💔</div>
+
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">
+          No favorites yet
+        </h2>
+
+        <p class="text-gray-500 mb-6">
+          Explore homes and add your favorites here.
+        </p>
+
+        <a href="/home-list"
+           class="inline-block bg-blue-600 hover:bg-blue-700
+                  text-white font-semibold px-6 py-3 rounded-lg">
+          Explore Homes
+        </a>
+      </div>
+
+    <% } else { %>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <% for (const home of favorites) { %>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden
+                      border border-gray-200 hover:shadow-xl
+                      transition duration-300">
+
+            <!-- Home Photo -->
+            <% if (home.photo) { %>
+              <img
+                src="<%= home.photo %>"
+                alt="<%= home.houseName %>"
+                class="w-full h-52 object-cover"
+              >
+            <% } else { %>
+              <div class="w-full h-52 bg-gray-200 flex items-center
+                          justify-center text-gray-500">
+                No image available
+              </div>
+            <% } %>
+
+            <!-- Home Information -->
+            <div class="p-5">
+
+              <h2 class="text-xl font-bold text-gray-800 mb-3">
+                <%= home.houseName %>
+              </h2>
+
+              <p class="text-gray-600 mb-2">
+                📍 <%= home.location %>
+              </p>
+
+              <p class="text-lg font-semibold text-green-600 mb-2">
+                ₹<%= home.price %> / night
+              </p>
+
+              <p class="text-yellow-500 font-medium mb-5">
+                ⭐ <%= home.rating %> / 5
+              </p>
+
+              <!-- Buttons -->
+              <div class="flex gap-3">
+
+                <a
+                  href="/home/<%= home.id %>"
+                  class="flex-1 text-center bg-blue-600
+                         hover:bg-blue-700 text-white
+                         font-semibold py-2 px-3 rounded-lg
+                         transition duration-200"
+                >
+                  View Details
+                </a>
+
+                <form action="/favorites/remove" method="POST"
+                      class="flex-1">
+
+                  <input type="hidden" name="id" value="<%= home.id %>">
+
+                  <button
+                    type="submit"
+                    class="w-full bg-rose-500 hover:bg-rose-600
+                           text-white font-semibold py-2 px-3
+                           rounded-lg transition duration-200"
+                  >
+                    ❤️ Remove
+                  </button>
+
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+
+        <% } %>
+
+      </div>
+
+    <% } %>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Update Your Home</title>
+	<link rel="stylesheet" href="/output.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+	<%- include('../partials/nav') %>
+
+	<main class="flex justify-center px-4 py-10">
+		<section class="w-full max-w-lg rounded-xl bg-white p-8 shadow-lg">
+			<h1 class="mb-2 text-center text-3xl font-bold text-rose-600">Update Your Home</h1>
+			<p class="mb-8 text-center text-gray-600">Edit the details for <%= home.houseName %>.</p>
+
+			<form action="/host/edit-home/<%= home.id %>" method="POST" enctype="multipart/form-data" class="space-y-5">
+				<div>
+					<label for="houseName" class="mb-2 block font-medium text-gray-700">House Name</label>
+					<input type="text" id="houseName" name="houseName" value="<%= home.houseName %>" required class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500">
+				</div>
+
+				<div>
+					<label for="price" class="mb-2 block font-medium text-gray-700">Price per Night (₹)</label>
+					<input type="number" id="price" name="price" value="<%= home.price %>" min="1" required class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500">
+				</div>
+
+				<div>
+					<label for="location" class="mb-2 block font-medium text-gray-700">Location</label>
+					<input type="text" id="location" name="location" value="<%= home.location %>" required class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500">
+				</div>
+
+				<div>
+					<label for="rating" class="mb-2 block font-medium text-gray-700">Rating (out of 5)</label>
+					<input type="number" id="rating" name="rating" value="<%= home.rating %>" min="0" max="5" step="0.1" required class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500">
+				</div>
+
+				<div>
+					<label for="photo" class="mb-2 block font-medium text-gray-700">Replace Photo (optional)</label>
+					<% if (home.photo) { %>
+						<img src="<%= home.photo %>" alt="Current photo of <%= home.houseName %>" class="mb-3 h-40 w-full rounded-lg object-cover">
+					<% } %>
+					<input type="file" id="photo" name="photo" accept="image/*" class="w-full rounded-lg border border-gray-300 px-4 py-3 file:mr-4 file:rounded-md file:border-0 file:bg-rose-100 file:px-4 file:py-2 file:text-rose-700">
+				</div>
+
+				<button type="submit" class="w-full rounded-lg bg-rose-600 py-3 font-semibold text-white shadow-sm transition hover:bg-rose-700">Update Home</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
