@@ -1,177 +1,195 @@
-# nestRivo 🏡
+# NEST RIVO
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/badge/Node.js-v20%2B-green.svg)](https://nodejs.org/)
-[![Express.js](https://img.shields.io/badge/Express.js-5.x-black.svg)](https://expressjs.com/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4.x-38B2AC.svg)](https://tailwindcss.com/)
-[![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248.svg)](https://www.mongodb.com/)
+## Overview
+NEST RIVO is a full‑stack vacation‑rental marketplace built with **React + Vite** on the frontend and **Node / Express** + **MongoDB** on the backend. It supports guest‑host messaging, bookings, reviews, an admin dashboard, analytics, and a public storefront with static pages.
 
-**nestRivo** is a full-featured, responsive vacation rental and home-stay booking web application. Inspired by platforms like Airbnb, nestRivo enables property hosts to list, manage, and showcase their accommodations, while guests can browse homes, view comprehensive property details, bookmark favorites, and reserve stays.
+## One account for guests and hosts
+Each person registers once and keeps one MongoDB user ID. All accounts retain guest capabilities; completing host onboarding adds host capabilities and a host profile to that same account. The dashboard switcher changes views without signing out. Properties reference their host user ID, and bookings store guest and host user IDs separately. The API enforces ownership and permissions, rejects self-bookings, and keeps admin assignment server-controlled. Host listings become visible to guests as soon as they are published.
 
----
-
-## 🌟 Key Features
-
-- **🏠 Explore & Search Homes**: Browse curated property listings with high-resolution photos, pricing, location, and guest ratings.
-- **🔍 Detailed Property Pages**: Inspect individual home details, amenities, pricing per night, and host information.
-- **❤️ Favorites & Wishlists**: Save and manage preferred stays for future trips.
-- **📅 Booking & Reservations**: Seamless booking workflow for guests reserving properties.
-- **🛎️ Host Dashboard**:
-  - Add new listings with title, price, location, rating, and image uploads.
-  - Edit or update existing property listings.
-  - Delete listings with automated database synchronization.
-- **📸 Image Uploads**: Secure multipart file handling using `multer` with local static serving.
-- **🎨 Modern Tailwind CSS UI**: Clean, responsive layout crafted with modern utility classes and Tailwind CSS v4.
-- **🔒 Secure Configuration**: Environment variable management using `dotenv` to protect database credentials and sensitive keys.
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| **Runtime** | [Node.js](https://nodejs.org/) (v20+) |
-| **Backend Framework** | [Express.js](https://expressjs.com/) (v5) |
-| **Database** | [MongoDB](https://www.mongodb.com/) (Native MongoDB Driver & Mongoose) |
-| **Templating Engine** | [EJS](https://ejs.co/) (Embedded JavaScript) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) |
-| **File Handling** | [Multer](https://github.com/expressjs/multer) |
-| **Process Management** | [Nodemon](https://nodemon.io/) & [Concurrently](https://github.com/open-cli-tools/concurrently) |
-
----
-
-## 📂 Project Structure
-
-```text
-nestRivo/
-├── controllers/            # Request handlers & application logic
-│   ├── error.js            # 404 & error controllers
-│   ├── hostController.js   # Host operations (add, edit, delete, upload)
-│   └── storeController.js  # Store & guest operations (home listing, booking)
-├── models/                 # Database models & data access layer
-│   ├── favourites.js       # Favorites model
-│   └── home.js             # Property listing model
-├── public/                 # Static assets (compiled CSS, client assets)
-│   └── output.css          # Tailwind compiled stylesheet
-├── routes/                 # Express route definitions
-│   ├── hostRouter.js       # Host routes (/host/*)
-│   └── storeRouter.js      # Guest store routes (/, /home-list, /favourites)
-├── src/                    # Source CSS & styling inputs
-│   └── input.css           # Tailwind directives
-├── uploads/                # Property uploaded images (git-ignored)
-├── utils/                  # Helper utilities & database connection
-│   ├── databaseUtils.js    # MongoDB connection pool & client getter
-│   └── pathUtils.js        # Root directory path helper
-├── views/                  # EJS template views
-│   ├── host/               # Host view templates (add-home, editHome, hostHomeList)
-│   ├── partials/           # Reusable EJS partials (navigation, cards)
-│   ├── store/              # Guest view templates (index, homeList, booking, etc.)
-│   └── notFound.ejs        # 404 error page
-├── .env.example            # Environment variable template
-├── .gitignore              # Files and folders excluded from Git
-├── app.js                  # Main server entry point
-├── nodemon.json            # Nodemon configuration
-└── package.json            # Project manifest & scripts
+For databases with existing accounts, run the idempotent capability migration from the `server` directory:
+```bash
+npm run migrate:capabilities
 ```
 
----
+## Stack
+- **Frontend:** React 18, Vite, TailwindCSS, React‑Router, TanStack Query, Framer Motion, Vitest + React Testing Library
+- **Backend:** Node.js, Express, Mongoose, JWT authentication, Socket.IO, Supertest, Jest
+- **Database:** MongoDB Atlas (or local MongoDB for development)
+- **File storage:** Local uploads for development; durable object storage is needed for production
+- **Payments:** Razorpay (Stripe stub can be swapped)
+- **Hosting:** Client – Netlify (SPA redirect). Server – Render (or Railway) with health‑check endpoint.
 
-## 🚀 Getting Started
+## Screenshots
+*(Add screenshots of the homepage, property listings, booking flow, admin panel, messaging UI, etc.)*
 
-### Prerequisites
-
-Ensure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (version 18 or higher recommended)
-- [npm](https://www.npmjs.com/) (bundled with Node.js)
-- A running [MongoDB](https://www.mongodb.com/) instance or a [MongoDB Atlas](https://www.mongodb.com/atlas) cluster connection string.
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Yanki-Kamboj/nestRivo.git
-cd nestRivo
+## Folder Structure
+```
+NEST_RIVO/
+│   README.md                     # *This file*
+│   netlify.toml                  # Netlify SPA config
+│   render.yaml                   # Render service config
+│   .eslintrc.json
+│   .prettierrc
+│
+├─ client/                         # React app
+│   ├─ src/
+│   ├─ public/
+│   └─ vite.config.ts
+│
+├─ server/                         # Express API
+│   ├─ models/                     # Mongoose schemas
+│   ├─ controllers/                # Route handlers
+│   ├─ routes/                     # Express routers
+│   ├─ middleware/                 # Auth, error handling, socket auth
+│   ├─ seed/seed.js                # Database seed script
+│   └─ .env.example                # Server env template
+│
+└─ docs/
+    ├─ PROGRESS.md                # Phase‑by‑phase log
+    └─ FINAL_REPORT.md            # Final implementation report
 ```
 
-### 2. Install Dependencies
-
+## Installation
 ```bash
+# Clone the repository
+git clone <repo‑url>
+cd NEST_RIVO
+
+# Install root dev tools (ESLint, Prettier)
 npm install
+
+# Install client dependencies
+cd client && npm install && cd ..
+
+# Install server dependencies
+cd server && npm install && cd ..
 ```
 
-### 3. Configure Environment Variables
+## Environment Setup
+Create `.env` files for both client and server based on the examples provided:
+- `client/.env.example`
+- `server/.env.example`
 
-Create a `.env` file in the project root by copying the provided `.env.example`:
+### Required server variables
+```
+MONGODB_URI=your‑mongodb‑atlas‑connection‑string
+JWT_SECRET=your‑secret‑key
+CLIENT_URL=https://your‑client‑domain.netlify.app
+SMTP_HOST=...
+SMTP_PORT=...
+SMTP_USER=...
+SMTP_PASS=...
+CONTACT_RECEIVER=support@nest‑rivo.com
+SEED_DEFAULT_PASSWORD=Password123!
+RAZORPAY_KEY_ID=...
+RAZORPAY_KEY_SECRET=...
+```
 
+### Required client variables
+```
+VITE_API_URL=http://localhost:5000/api   # or your production API URL
+```
+
+## MongoDB Atlas
+Create a free Atlas cluster, add a DB user, whitelist IPs, and use the connection string in `MONGODB_URI`.
+
+## Listing photo uploads
+Hosts can add up to five JPG, PNG, or WebP photos from a phone or computer when creating a listing. During local development, image files are stored under the ignored `uploads/` directory and served by the API. Cloudinary or another durable object-storage integration is not configured yet; add one before deploying to an ephemeral server filesystem.
+
+## Razorpay / Stripe
+Provide `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` (or Stripe equivalents) for payment processing.
+
+## Seeding the Database
 ```bash
-cp .env.example .env
+# Load demo data (admin, hosts, guests, properties, etc.)
+npm run seed
+# To clear seeded data
+npm run seed:destroy
 ```
+Demo‑account credentials are listed in the **Demo Accounts** section below.
 
-Open `.env` and configure your credentials:
-
-```env
-PORT=3001
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net
-DB_NAME=nestrivo
-```
-
-### 4. Run the Application
-
-#### Development Mode (Server + Tailwind CSS Watcher)
+## Running Locally
 ```bash
-npm start
-```
-This runs `nodemon app.js` concurrently with the Tailwind CSS builder.
+# Start backend
+cd server && npm run dev
 
-#### Server Only
+# Start frontend
+cd client && npm run dev
+```
+Client runs on `http://localhost:5173` and proxies API requests to `http://localhost:5000`.
+
+## Testing
 ```bash
-npm run dev
-```
+# Lint & format check
+npm run lint
 
-#### Build Production CSS
+# Backend tests
+cd server && npm test
+
+# Frontend tests
+cd client && npm test
+```
+All tests pass (see `docs/FINAL_REPORT.md` for exact numbers).
+
+## Building for Production
 ```bash
-npm run build:css
+# Client build
+cd client && npm run build
+
+# Server start (already compiled, just run)
+cd server && npm start
 ```
 
-Open your browser and navigate to:
-```text
-http://localhost:3001
+## Deployment
+### Client – Netlify
+1. Connect the repository in Netlify.
+2. Build command: `npm run build` (run inside the `client` folder).
+3. Publish directory: `client/dist`.
+4. Netlify reads `netlify.toml` for SPA redirect (`/* → /index.html`).
+
+### Server – Render (or Railway)
+1. Add a **Web Service** pointing to the `server` directory.
+2. Build command: `npm install && npm run lint`.
+3. Start command: `npm start` (runs `node server.js`).
+4. Health‑check endpoint: `GET /api/health` returns `{status:"ok"}`.
+5. Set all environment variables in the Render dashboard (same as `.env.example`).
+6. Configure CORS to allow the Netlify domain (`origin: https://your‑site.netlify.app`).
+7. Enable **Always Use HTTPS**.
+
+## Demo Accounts
+| Role  | Email               | Password |
+|-------|---------------------|----------|
+| Host  | host1@example.com   | `SEED_DEFAULT_PASSWORD` |
+| Host  | host2@example.com   | `SEED_DEFAULT_PASSWORD` |
+| Host  | host3@example.com   | `SEED_DEFAULT_PASSWORD` |
+| Guest | guest1@example.com  | `SEED_DEFAULT_PASSWORD` |
+| Guest | guest2@example.com  | `SEED_DEFAULT_PASSWORD` |
+| Guest | guest3@example.com  | `SEED_DEFAULT_PASSWORD` |
+| Guest | guest4@example.com  | `SEED_DEFAULT_PASSWORD` |
+| Guest | guest5@example.com  | `SEED_DEFAULT_PASSWORD` |
+
+There is no default admin account in a fresh local database. Create the first admin from the project directory in PowerShell:
+```powershell
+$env:ADMIN_EMAIL = Read-Host "Admin email"
+$env:ADMIN_NAME = Read-Host "Admin name (only needed for a new account)"
+$securePassword = Read-Host "Current account password or new admin password" -AsSecureString
+$passwordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
+try {
+  $env:ADMIN_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($passwordPointer)
+  npm run admin:create --prefix server
+} finally {
+  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($passwordPointer)
+  Remove-Item Env:ADMIN_EMAIL, Env:ADMIN_NAME, Env:ADMIN_PASSWORD -ErrorAction SilentlyContinue
+}
 ```
+If `ADMIN_EMAIL` belongs to an existing account, enter that account's current password to promote it while retaining its guest/host access. Otherwise, a new admin account is created and requires a 12-character minimum password. This local command only works when no admin already exists; ordinary registration cannot grant admin privileges.
+
+## Known Limitations
+- Payment integration uses Razorpay sandbox; production keys required.
+- Email is a development-only console preview; production email delivery is not configured.
+- Listing photos are uploaded locally during development; configure durable object storage before deploying to an ephemeral filesystem.
+- Some admin analytics rely on real transaction data.
+- Accessibility testing was limited to manual checks; further audits recommended.
 
 ---
-
-## 🛣️ Application Endpoints
-
-### Store / Guest Routes
-| Method | Route | Description |
-|---|---|---|
-| `GET` | `/` | Landing page featuring all listed homes |
-| `GET` | `/home-list` | Browse catalog of available stays |
-| `GET` | `/homes/:homeId` | View detailed information for a specific home |
-| `GET` | `/booking` | View active bookings |
-| `POST` | `/booking` | Book a property |
-| `GET` | `/favourites` | View saved favorite homes |
-| `POST` | `/favourites` | Add a property to favorites |
-| `POST` | `/favourites/delete/:homeId` | Remove a property from favorites |
-
-### Host Routes
-| Method | Route | Description |
-|---|---|---|
-| `GET` | `/host/add-home` | Render home submission form |
-| `POST` | `/host/register` | Submit and save a new home (with photo upload) |
-| `GET` | `/host/home-list` | View listings created by host |
-| `GET` | `/host/edit-home/:homeId` | Render listing edit form |
-| `POST` | `/host/edit-home/:homeId` | Update home details and/or photo |
-| `POST` | `/host/delete-home/:homeId` | Delete a home from listings |
-
----
-
-## 📄 License
-
-This project is open-source and licensed under the [MIT License](LICENSE).
-
----
-
-## 👨‍💻 Author
-
-**Yanki Kamboj**
-- GitHub: [@Yanki-Kamboj](https://github.com/Yanki-Kamboj)
+*Happy coding!*
