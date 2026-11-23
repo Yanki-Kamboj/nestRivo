@@ -1,0 +1,11 @@
+# Netlify configuration for the client SPA
+[build]
+  # Netlify will run `npm run build` in the client folder
+  publish = "client/dist"
+  command = "cd client && npm install && npm run build"
+
+# Redirect all traffic to index.html for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
